@@ -1,0 +1,16 @@
+<launch>
+  <arg name="robot_prefix"              default="$(env MMPUG_SYSTEM_ID mt007)" />
+  <arg name="sensor_index"              default="$(env DTC_SENSOR_PAYLOAD_INDEX 7)" />
+  <arg name="PORT"                      default="$(env MMPUG_PORT 6000)" />
+
+
+  <group>
+    <push-ros-namespace namespace="$(var robot_prefix)" />
+        <node pkg="image_sender" exec="server" name="server" output="screen">
+            <param name="sensor_index"  value="$(var sensor_index)"   type="str"/>
+            <param name="robot_prefix"  value="$(var robot_prefix)"   type="str"/>
+            <param name="PORT"          value="$(var PORT)"          />
+
+        </node>
+  </group>
+</launch>
